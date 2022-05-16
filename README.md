@@ -3,6 +3,8 @@
 
 _**This is a 21 School project**_
 
+![125/100](other/1020.jpeg)
+
 _Pipex is a project that reproduces the behaviour of **the shell pipe |** command in C._
 
 ---
