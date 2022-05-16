@@ -1,9 +1,23 @@
 # pipe
 ## This project will let discover in detail a UNIX mechanism.
 
+_**This is a 21 School project**_
+
+_Pipex is a project that reproduces the behaviour of **the shell pipe |** command in C._
+
+---
+
 Program will be executed as follows:
 
-> ./pipex file1 cmd1 cmd2 file2
+```bash
+$> ./pipex file1 cmd1 cmd2 file2
+```
+
+and behave as this line does in the shell:
+
+```bash
+$> < file1 cmd1 | cmd2 > file2
+```
  
 It must take 4 arguments:
  
@@ -11,18 +25,35 @@ It must take 4 arguments:
  
 • cmd1 and cmd2 are shell commands with their parameters.
   
-It must behave exactly the same as the shell command below:
->  $> < file1 cmd1 | cmd2 > file2
-
+> The general idea: we read from infile, execute cmd1 with infile as input, send the output to cmd2, which will write to outfile.
 ---
+## Multiple pipes and `here_doc`
 
-### ***And also...***
+### Multiple pipes
+_Program need handle multiple pipes._
 
-Handle multiple pipes:
-> $> ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
+Handle multiple pipes. Program will be executed as follows:
 
-Support « and » when the first parameter is "here_doc".
-> $> ./pipex here_doc LIMITER cmd cmd1 file
-  
- the program behaves like:
- >  cmd << LIMITER | cmd1 >> file
+```bash
+$> ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
+```
+
+and behave as this line does in the shell:
+
+```bash
+$> < file1 cmd1 | cmd2 | cmd3 | ... | cmdn > file2
+```
+
+### `here_doc`
+
+Support `<<` and `>>` when the _first parameter_ is `here_doc`
+
+_This:_
+```bash
+$> ./pipex here_doc LIMITER cmd cmd1 file
+```
+
+_should behave like:_
+```bash
+cmd << LIMITER | cmd1 >> file
+```
